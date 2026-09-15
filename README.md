@@ -124,3 +124,7 @@ npm run build
 ## License
 
 MIT
+
+---
+
+Built by [ArkNet Digital](https://github.com/jayblast-spec).
