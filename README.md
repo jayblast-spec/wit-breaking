@@ -4,6 +4,8 @@
 [![npm](https://img.shields.io/npm/v/wit-breaking)](https://www.npmjs.com/package/wit-breaking)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
+![wit-breaking: classifying a WIT interface change as breaking or safe](./docs/banner.svg)
+
 **Detects breaking changes between two versions of a WebAssembly Component Model WIT interface — the equivalent of `buf breaking` (protobuf) or `oasdiff` (OpenAPI), for WIT.**
 
 ## Background, for anyone new to this

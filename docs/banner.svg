@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 260" width="860" height="260" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect x="1" y="1" width="858" height="258" rx="12" fill="#ffffff" stroke="#d0d7de" stroke-width="1"/>
+  <text x="430" y="32" text-anchor="middle" font-size="16" font-weight="700" fill="#1f2328">wit-breaking: is this WIT interface change safe to ship?</text>
+
+  <rect x="40" y="60" width="220" height="110" rx="8" fill="#f6f8fa" stroke="#57606a"/>
+  <text x="150" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#1f2328">before.wit</text>
+  <text x="60" y="100" font-family="Consolas, monospace" font-size="10" fill="#334">func: func(</text>
+  <text x="70" y="114" font-family="Consolas, monospace" font-size="10" fill="#334">a: string,</text>
+  <text x="70" y="128" font-family="Consolas, monospace" font-size="10" fill="#334">b: u32,</text>
+  <text x="60" y="142" font-family="Consolas, monospace" font-size="10" fill="#334">) -&gt; result;</text>
+
+  <rect x="300" y="60" width="220" height="110" rx="8" fill="#f6f8fa" stroke="#57606a"/>
+  <text x="410" y="80" text-anchor="middle" font-size="11" font-weight="600" fill="#1f2328">after.wit</text>
+  <text x="320" y="100" font-family="Consolas, monospace" font-size="10" fill="#334">func: func(</text>
+  <text x="330" y="114" font-family="Consolas, monospace" font-size="10" fill="#334">a: string,</text>
+  <text x="330" y="128" font-family="Consolas, monospace" font-size="10" fill="#cf222e" text-decoration="line-through">b: u32,</text>
+  <text x="320" y="142" font-family="Consolas, monospace" font-size="10" fill="#334">) -&gt; result;</text>
+
+  <path d="M520 115 H590" stroke="#57606a" stroke-width="2" marker-end="url(#arrow6)"/>
+
+  <rect x="590" y="80" width="220" height="70" rx="8" fill="#fff7e6" stroke="#d4a017"/>
+  <text x="700" y="105" text-anchor="middle" font-size="12" font-weight="600" fill="#7a5200">diffWit(before, after)</text>
+  <text x="700" y="123" text-anchor="middle" font-size="10" fill="#334">bracket-depth-aware parse,</text>
+  <text x="700" y="137" text-anchor="middle" font-size="10" fill="#334">classify each change</text>
+
+  <rect x="590" y="185" width="105" height="34" rx="6" fill="#ffebe9" stroke="#cf222e"/>
+  <text x="642" y="207" text-anchor="middle" font-size="10" font-weight="700" fill="#82071e">breaking: param removed</text>
+
+  <text x="430" y="220" text-anchor="middle" font-size="11" fill="#57606a">buf breaking / oasdiff, for the WebAssembly Component Model's WIT interfaces --</text>
+  <text x="430" y="238" text-anchor="middle" font-size="11" fill="#57606a">catches an incompatible interface change in CI, before it breaks every caller.</text>
+
+  <defs>
+    <marker id="arrow6" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#57606a"/>
+    </marker>
+  </defs>
+</svg>
