@@ -1,0 +1,62 @@
+name: Test action.yml
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write fixture WIT files
+        run: |
+          mkdir -p /tmp/wit-fixtures
+          cat > /tmp/wit-fixtures/before.wit << 'EOF'
+          interface host {
+            log: func(msg: string);
+          }
+          EOF
+          cat > /tmp/wit-fixtures/after.wit << 'EOF'
+          interface host {
+            log: func(msg: string, level: u32);
+          }
+          EOF
+
+      - name: Run action against a known-breaking change (expect failure)
+        id: breaking
+        uses: ./
+        continue-on-error: true
+        with:
+          before: /tmp/wit-fixtures/before.wit
+          after: /tmp/wit-fixtures/after.wit
+
+      - name: Assert the action correctly reported breaking=true and failed
+        run: |
+          if [ "${{ steps.breaking.outcome }}" != "failure" ]; then
+            echo "expected the action step to fail on a breaking change, got outcome=${{ steps.breaking.outcome }}"
+            exit 1
+          fi
+          if [ "${{ steps.breaking.outputs.breaking }}" != "true" ]; then
+            echo "expected output breaking=true, got '${{ steps.breaking.outputs.breaking }}'"
+            exit 1
+          fi
+          echo "OK: action correctly failed and reported breaking=true"
+
+      - name: Run action against identical files (expect success)
+        id: safe
+        uses: ./
+        with:
+          before: /tmp/wit-fixtures/before.wit
+          after: /tmp/wit-fixtures/before.wit
+
+      - name: Assert the action correctly reported breaking=false
+        run: |
+          if [ "${{ steps.safe.outputs.breaking }}" != "false" ]; then
+            echo "expected output breaking=false, got '${{ steps.safe.outputs.breaking }}'"
+            exit 1
+          fi
+          echo "OK: action correctly reported breaking=false for identical files"

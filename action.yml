@@ -1,0 +1,66 @@
+name: 'wit-breaking'
+description: 'Detects breaking changes between two versions of a WebAssembly Component Model WIT interface.'
+author: 'jayblast-spec'
+branding:
+  icon: 'shield'
+  color: 'purple'
+
+inputs:
+  before:
+    description: 'Path to the "before" .wit file'
+    required: true
+  after:
+    description: 'Path to the "after" .wit file'
+    required: true
+  fail-on-breaking:
+    description: 'Fail the workflow step if any breaking change is found'
+    required: false
+    default: 'true'
+
+outputs:
+  breaking:
+    description: '"true" if any breaking change was found, "false" otherwise'
+    value: ${{ steps.run.outputs.breaking }}
+  summary:
+    description: 'Human-readable summary of all changes found'
+    value: ${{ steps.run.outputs.summary }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22.x'
+
+    - name: Build wit-breaking
+      shell: bash
+      run: |
+        cd "${{ github.action_path }}"
+        npm ci
+        npm run build
+
+    - name: Run wit-breaking
+      id: run
+      shell: bash
+      run: |
+        set +e
+        OUTPUT_FILE=$(mktemp)
+        node "${{ github.action_path }}/dist/cli.js" "${{ inputs.before }}" "${{ inputs.after }}" | tee "$OUTPUT_FILE"
+        EXIT_CODE=${PIPESTATUS[0]}
+        set -e
+
+        {
+          echo "summary<<WIT_BREAKING_EOF"
+          cat "$OUTPUT_FILE"
+          echo "WIT_BREAKING_EOF"
+        } >> "$GITHUB_OUTPUT"
+
+        if [ "$EXIT_CODE" -ne 0 ]; then
+          echo "breaking=true" >> "$GITHUB_OUTPUT"
+          if [ "${{ inputs.fail-on-breaking }}" = "true" ]; then
+            exit 1
+          fi
+        else
+          echo "breaking=false" >> "$GITHUB_OUTPUT"
+        fi
