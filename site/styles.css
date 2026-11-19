@@ -1,0 +1,118 @@
+:root {
+  color-scheme: light;
+  --text: #1f2328;
+  --muted: #57606a;
+  --line: #d0d7de;
+  --bg: #ffffff;
+  --soft: #f6f8fa;
+  --breaking: #82071e;
+  --breaking-bg: #ffebe9;
+  --safe: #116329;
+  --safe-bg: #dafbe1;
+  --code: #0a3069;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.55;
+}
+
+main {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+header p,
+footer {
+  color: var(--muted);
+}
+
+h1 {
+  margin: 0 0 0.4rem;
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin: 2rem 0 0.6rem;
+  font-size: 1.2rem;
+}
+
+p {
+  margin: 0.6rem 0;
+}
+
+a {
+  color: #0969da;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  background: var(--soft);
+}
+
+.breaking,
+.safe {
+  font-weight: 650;
+}
+
+.breaking {
+  color: var(--breaking);
+}
+
+.safe {
+  color: var(--safe);
+}
+
+pre {
+  margin: 0.8rem 0;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  background: var(--soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+code {
+  font-family: Consolas, "SFMono-Regular", ui-monospace, monospace;
+  color: var(--code);
+}
+
+pre code {
+  color: inherit;
+}
+
+ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+}
+
+footer {
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
+}

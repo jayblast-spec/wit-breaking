@@ -3,7 +3,7 @@
 [![CI](https://github.com/jayblast-spec/wit-breaking/actions/workflows/ci.yml/badge.svg)](https://github.com/jayblast-spec/wit-breaking/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/wit-breaking)](https://www.npmjs.com/package/wit-breaking)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![Docs](https://img.shields.io/badge/docs-wit--breaking.vercel.app-5eeab0)](https://wit-breaking.vercel.app)
+[![Docs](https://img.shields.io/badge/docs-github%20pages-5eeab0)](https://jayblast-spec.github.io/wit-breaking/)
 
 ![wit-breaking: classifying a WIT interface change as breaking or safe](./docs/banner.svg)
 

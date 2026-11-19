@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wit-breaking</title>
+    <meta
+      name="description"
+      content="Detect breaking changes between two versions of a WebAssembly Component Model WIT interface."
+    />
+    <link rel="canonical" href="https://jayblast-spec.github.io__BASE_PATH__/" />
+    <link rel="stylesheet" href="__ASSET_PREFIX__/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>wit-breaking</h1>
+        <p>
+          Detects breaking changes between two versions of a WebAssembly
+          Component Model WIT interface — the equivalent of
+          <code>buf breaking</code> for protobuf or <code>oasdiff</code> for
+          OpenAPI.
+        </p>
+      </header>
+
+      <h2>What it does</h2>
+      <p>
+        Give it the WIT text from before a change and the WIT text after.
+        It walks every interface and function and classifies each difference.
+        The process exits <code>1</code> when anything breaking is found, and
+        <code>0</code> otherwise.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>What changed</th>
+            <th>Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>A function was removed</td>
+            <td class="breaking">Breaking</td>
+          </tr>
+          <tr>
+            <td>A function's parameters changed</td>
+            <td class="breaking">Breaking</td>
+          </tr>
+          <tr>
+            <td>A function's return type changed</td>
+            <td class="breaking">Breaking</td>
+          </tr>
+          <tr>
+            <td>A whole interface was removed</td>
+            <td class="breaking">Breaking</td>
+          </tr>
+          <tr>
+            <td>A function was added</td>
+            <td class="safe">Safe</td>
+          </tr>
+          <tr>
+            <td>A whole interface was added</td>
+            <td class="safe">Safe</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Signature comparison is textual: any parameter or return-type change
+        is flagged as breaking. Extract WIT from a compiled component with
+        <code>wasm-tools component wit</code>, then diff the two text files.
+      </p>
+
+      <h2>Install</h2>
+      <pre><code>npm install --save-dev wit-breaking</code></pre>
+
+      <h2>Usage</h2>
+      <p>Command line:</p>
+      <pre><code>npx wit-breaking before.wit after.wit</code></pre>
+      <p>Library:</p>
+      <pre><code>import { parseWit, diffWit } from "wit-breaking";
+
+const result = diffWit(parseWit(beforeSource), parseWit(afterSource));
+if (result.breaking) {
+  process.exit(1);
+}</code></pre>
+      <p>GitHub Action:</p>
+      <pre><code>- uses: jayblast-spec/wit-breaking@main
+  with:
+    before: before.wit
+    after: after.wit</code></pre>
+
+      <h2>Links</h2>
+      <ul>
+        <li><a href="https://github.com/jayblast-spec/wit-breaking">Repository</a></li>
+        <li><a href="https://www.npmjs.com/package/wit-breaking">npm package</a></li>
+        <li><a href="https://component-model.bytecodealliance.org/">WebAssembly Component Model</a></li>
+        <li><a href="https://github.com/jayblast-spec/wit-breaking/blob/main/LICENSE">MIT license</a></li>
+      </ul>
+
+      <footer>
+        <p>Built by <a href="https://github.com/jayblast-spec">ArkNet Digital</a>.</p>
+      </footer>
+    </main>
+  </body>
+</html>
